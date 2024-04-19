@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Project Listing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f2f2f2;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <form id="project-form">
+    <h2>Upload Project Listing</h2>
+    <div id="error-message" class="error"></div>
+    <select id="department" name="department" required>
+        <option value="" disabled selected>Select Department</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Electrical/Electronics">Electrical/Electronics</option>
+        <option value="Mechanical">Mechanical</option>
+        <option value="Aerospace">Aerospace</option>
+        <option value="Biotech">Biotech</option>
+        <option value="Civil">Civil</option>
+        <option value="Chemical">Chemical</option>
+    </select>
+    <input type="text" id="projectName" name="projectName" placeholder="Project Name" required>
+    <textarea id="projectDetails" name="projectDetails" placeholder="Project Details" rows="4" required></textarea>
+    <input type="text" id="status" name="status" placeholder="Status" required>
+    <input type="text" id="facultyName" name="facultyName" placeholder="Faculty Name" required>
+    <input type="text" id="email" name="email" placeholder="Email" required>
+    <input type="text" id="contact" name="contact" placeholder="Contact" required>
+    <input type="text" id="cabin" name="cabin" placeholder="Cabin" required>
+   
+    <input type="submit" value="Upload">
+  </form>
+
+  <script>
+    document.getElementById('project-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(this);
+      const projectData = {};
+      formData.forEach((value, key) => {
+        projectData[key] = value;
+      });
+      
+      try {
+        const response = await fetch('/teachlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify([projectData])
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to upload project listing');
+        }
+        alert(data.message);
+        // Optionally redirect to another page after successful upload
+        window.location.href = '/success.html';
+      } catch (error) {
+        document.getElementById('error-message').innerText = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

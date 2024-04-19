@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+</head>
+<body>
+    <h2>Notifications</h2>
+    <div id="notificationsTable"></div>
+
+    <script>
+        // Function to generate table HTML for notifications
+        function generateNotificationsTableHtml(data) {
+            let tableHtml = '<table border="1">';
+            tableHtml += '<tr><th>Department</th><th>Project Name</th><th>Project Details</th><th>Status</th><th>Name of Faculty</th><th>Email ID</th><th>Contact</th><th>Cabin</th></tr>';
+            data.forEach(item => {
+                tableHtml += `<tr><td>${item.department}</td><td>${item.projectName}</td><td>${item.projectDetails}</td><td>${item.status}</td><td>${item.facultyName}</td><td>${item.email}</td><td>${item.contact}</td><td>${item.cabin}</td></tr>`;
+            });
+            tableHtml += '</table>';
+            return tableHtml;
+        }
+
+        // Fetch notifications from server
+        function fetchNotifications() {
+            fetch('/notifications')
+            .then(response => response.json())
+            .then(data => {
+                const tableHtml = generateNotificationsTableHtml(data);
+                document.getElementById('notificationsTable').innerHTML = tableHtml;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Initial fetch when the page loads
+        fetchNotifications();
+    </script>
+</body>
+</html>

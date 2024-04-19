@@ -1,0 +1,83 @@
+body {
+    background-color: #020c13;
+    font-family: 'Roboto', sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+.header {
+    background-color: #020c13;
+    color: #fff;
+    padding: 1px;
+    text-align: right;
+    display: block;
+ /* Two columns, one for text and one for image */
+    align-items: right;
+}
+.head_button{ border: 1px solid blanchedalmond; /* Border style and color */
+   
+ margin-left: 20px;
+  /* Padding inside the box */
+    background-color: #020c13; /* Background color of the box */
+    display: inline-block;
+}
+.links{
+    font-family: 'Roboto', sans-serif;
+    font-size:2em;
+    color: blanchedalmond;
+       text-decoration: none;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns, one for text and one for image */
+    align-items: center;
+    height: 100vh;
+    padding: 0 20px; /* Add padding to give some space between the content and edges */
+}
+
+.text {
+    padding: 0 20px;
+    color: blanchedalmond;
+       text-decoration: none; /* Optional: Add padding to the text for better spacing */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+}
+
+.main-container {
+    display: grid ;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.main-container:nth-child(2){
+	transition-delay: 200ms;
+}
+.main-container:nth-child(3){
+	transition-delay: 300ms;
+}
+.main-container:nth-child(4){
+	transition-delay: 400ms;
+}
+/* Hide initially, then fade in */
+.hidden {
+    opacity: 0;
+    transition: all 2.5s;
+    transform: translate(-100%);
+    filter: blur(5px);
+
+}
+
+/* Show when in viewport */
+.show {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate(0px);
+}

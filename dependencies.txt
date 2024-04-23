@@ -1,0 +1,3 @@
+express@latest
+mongoose@latest
+jsonwebtoken@latest

@@ -1,0 +1,2 @@
+install the needed dependencies using 
+xargs -I % npm install % < dependencies.txt

@@ -1,4 +1,6 @@
 clone this repo
+git clone https://github.com/breeze0923/v22.git
+
 then install node using curl on windows
 
 curl -o nodejs-setup.exe https://nodejs.org/dist/latest/node-v16.14.0-x64.msi
